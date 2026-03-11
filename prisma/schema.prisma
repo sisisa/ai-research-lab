@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Article {
+  id          String   @id @default(uuid())
+  title       String
+  url         String   @unique
+  summary     String?
+  content     String?
+  tags        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  learningRecords LearningRecord[]
+}
+
+model LearningRecord {
+  id             String   @id @default(uuid())
+  articleId      String
+  article        Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  
+  learningMethod String   
+  score          Int?     
+  
+  nextReviewDate DateTime?
+  reviewStatus   String   @default("pending")
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

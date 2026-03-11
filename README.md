@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI研究所
 
-## Getting Started
+## プロジェクト概要
+AIの最新情報を能動的に収集し、効率的に学習するためのポートフォリオ用Webアプリケーションです。「AI速報ドットコム」などの外部サイトからのスクレイピングと、「Google Skills」との連携を取り入れ、知識のインプットを集約します。さらに、科学的に証明された4つの学習法を取り入れ、高度なUIと洗練されたアニメーションでユーザーの学習体験を劇的に向上させます。
 
-First, run the development server:
+## 技術スタック
+- フロントエンド: Next.js (App Router), React, TypeScript
+- スタイリング & UI: Tailwind CSS, shadcn/ui, Framer Motion
+- バックエンド / データベース: Prisma, SQLite
+- スクレイピング: Cheerio (Next.js API Routesにて実装)
 
+## 実装の詳細
+
+### 1. モダンな基本UIと機能紹介（ダッシュボード）
+- ダークモードに完全対応した、高いデザイン性を持つダッシュボード。
+- 「情報収集」と「効率的学習」の2つの柱をわかりやすく案内する機能紹介UI。
+- shadcn/ui の Sidebar コンポーネントを活用したシームレスなナビゲーション。
+- Framer Motion を用いたページ全体のフェードインやホバーエフェクト。
+
+### 2. AI情報収集および外部連携 (Gathering Hub)
+- **AI速報ドットコム連携 (スクレイピング)**: 対象URLを入力することで、AIの最新ニュースなどを自動取得・要約し、自分だけの学習データベースを構築。
+- **Google Skills 連携**: Googleの提唱するAIスキル要件や資格トレンド情報を統合し、必要な学習パスウェイを取り込むための基盤画面。
+
+### 3. 4つの科学的学習法の実装 (Learning Hub)
+1. アクティブリコール (Active Recall)
+   - 取得したAI情報に対して自ら記憶を引き出すためのフラッシュカードUI。
+   - Framer Motionによる3D反転アニメーションを実装。
+   - 「思い出した」「忘れた」のステータス管理機能。
+2. 分散学習・想起学習 (Spaced Repetition)
+   - 情報を時間を空けて復習するためのスケジュール管理UI。
+   - 「今日」「明日」など、期日に合わせた視覚的なリスト表示。
+3. 精緻的質問・自己質問 (Elaborative Interrogation)
+   - AI技術の「なぜ」を深く考えるためのテキスト入力フォーム。
+   - 疑似的なAIフィードバック生成機能を搭載し、回答後のフォローアップを表現。
+4. インターリービング (Interleaving)
+   - 「LLM」「画像生成」「エージェント」など、複数ジャンルのトピックを交互に出題。
+   - トピックの切り替えをスムーズに行うアニメーション付きクイズUI。
+
+### 4. バックエンドとアーキテクチャ
+- データベース設計 (SQLite + Prisma):
+  - `Article` モデル: 記事のタイトル、URL、要約、内容を保存。
+  - `LearningRecord` モデル: 各記事の学習履歴、次回リマインド日時、学習スコア等を管理。
+- スクレイピング API (`/api/scrape`):
+  - URLを受け取り、Cheerioを用いてサイトのタイトルや説明文を取得するロジックを実装。
+  - ※ポートフォリオとしての稼働安定性およびビルド時のエラーを回避するため、現在はフロントエンドでのデモ用にモックデータを返す仕様としていますが、スクレイピングの基盤コード自体は内包されています。
+
+## セットアップと起動方法
+
+1. 依存関係のインストール
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. データベースの初期化
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. 開発サーバーの起動
+```bash
+npm run dev
+```
