@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Globe, Search, RefreshCw, Plus, CheckCircle2, History, BookOpen } from "lucide-react"
+import { Globe, RefreshCw, Plus, CheckCircle2, History, BookOpen } from "lucide-react"
 import { toast } from "sonner"
+import { SkillTree } from "@/components/gathering/skill-tree"
 
 interface Article {
   id: string;
@@ -154,21 +155,10 @@ export default function GatheringHub() {
             </CardContent>
           </Card>
 
-          {/* Google Skills (Placeholder) */}
-          <Card className="shadow-md border-border/50 bg-card/40 backdrop-blur-sm overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
+          {/* Google Skills (Skill Tree) */}
+          <Card className="shadow-md border-border/50 bg-card/40 backdrop-blur-sm overflow-hidden h-full">
             <div className="h-1.5 w-full bg-emerald-500" />
-            <CardHeader className="pb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Search className="w-5 h-5 text-emerald-500" />
-                <CardTitle className="text-xl">Google Skills 連携</CardTitle>
-              </div>
-              <CardDescription>最新のAIスキル要件や資格情報を同期します（開発中）。</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="p-6 text-center border-2 border-dashed border-border/60 rounded-xl bg-background/20">
-                <p className="text-sm text-muted-foreground">現在API連携の準備を行っています。</p>
-              </div>
-            </CardContent>
+            <SkillTree />
           </Card>
         </div>
 
