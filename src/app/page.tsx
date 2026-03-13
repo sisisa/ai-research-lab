@@ -6,27 +6,27 @@ import { Brain, Globe, Search, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 const features = [
-  { 
-    title: "AI情報収集 (AI速報ドットコム)", 
-    icon: Globe, 
-    description: "AI速報ドットコムなどの最新ニュースサイトからスクレイピングを行い、AIに関する最新情報を自動的に収集・蓄積します。", 
-    color: "text-blue-500", 
+  {
+    title: "AI情報収集 (AI速報ドットコム)",
+    icon: Globe,
+    description: "AI速報ドットコムなどの最新ニュースサイトからスクレイピングを行い、AIに関する最新情報を自動的に収集・蓄積します。",
+    color: "text-blue-500",
     bg: "bg-blue-500/10",
-    link: "/gathering"
+    link: "/searching"
   },
-  { 
-    title: "Google Skills 連携", 
-    icon: Search, 
-    description: "Google Skillsなどの外部プラットフォームと連携し、必要なスキル情報やトレンドを取り込み、学習コンテンツとして再構成します。", 
-    color: "text-emerald-500", 
+  {
+    title: "Google Skills 連携",
+    icon: Search,
+    description: "Google Skillsなどの外部プラットフォームと連携し、必要なスキル情報やトレンドを取り込み、学習コンテンツとして再構成します。",
+    color: "text-emerald-500",
     bg: "bg-emerald-500/10",
-    link: "/gathering"
+    link: "/searching"
   },
-  { 
-    title: "4つの科学的学習メソッド", 
-    icon: Brain, 
-    description: "収集した情報を「アクティブリコール」「分散学習」「精緻的質問」「インターリービング」の4つの手法を用いて効率的に脳に定着させます。", 
-    color: "text-purple-500", 
+  {
+    title: "4つの科学的学習メソッド",
+    icon: Brain,
+    description: "収集した情報を「アクティブリコール」「分散学習」「精緻的質問」「インターリービング」の4つの手法を用いて効率的に脳に定着させます。",
+    color: "text-purple-500",
     bg: "bg-purple-500/10",
     link: "/learning"
   },
@@ -35,9 +35,9 @@ const features = [
 export default function Dashboard() {
   return (
     <div className="max-w-5xl mx-auto space-y-10 pb-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 15 }} 
-        animate={{ opacity: 1, y: 0 }} 
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-center max-w-3xl mx-auto mt-8"
       >
@@ -74,7 +74,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent className="pt-2 flex-1 flex flex-col justify-between">
                 <p className="text-muted-foreground leading-relaxed mb-6">{feature.description}</p>
-                <Link 
+                <Link
                   href={feature.link}
                   className={`inline-flex font-medium text-sm group-hover:underline ${feature.color}`}
                 >

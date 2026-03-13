@@ -20,7 +20,7 @@ const items = [
   },
   {
     title: "情報収集 (AI速報など)",
-    url: "/gathering",
+    url: "/searching",
     icon: Globe,
   },
   {
@@ -48,8 +48,8 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
-                    tooltip={item.title} 
+                  <SidebarMenuButton
+                    tooltip={item.title}
                     className="hover:bg-primary/5 hover:text-primary transition-all rounded-lg py-5 px-3"
                     render={<a href={item.url} />}
                   >

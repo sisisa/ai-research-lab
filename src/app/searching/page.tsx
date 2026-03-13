@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Globe, RefreshCw, Plus, CheckCircle2, History, BookOpen } from "lucide-react"
 import { toast } from "sonner"
-import { SkillTree } from "@/components/gathering/skill-tree"
 
 interface Article {
   id: string;
@@ -17,7 +16,7 @@ interface Article {
   source?: string;
 }
 
-export default function GatheringHub() {
+export default function SearchingHub() {
   const [url, setUrl] = useState("")
   const [isScraping, setIsScraping] = useState(false)
   const [scrapedResult, setScrapedResult] = useState<Article | null>(null)
@@ -87,15 +86,15 @@ export default function GatheringHub() {
         <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
           AI情報収集・連携
         </div>
-        <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight mb-3">Gathering Hub</h1>
-        <p className="text-muted-foreground text-lg max-w-2xl">
-          AI速報ドットコムからの最新ニュースを取得したり、Google Skillsの情報を統合し、独自の学習データベースを構築します。
+        <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight mb-3 font-outfit">Searching Hub</h1>
+        <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+          最新のAIニュースを収集・蓄積するための情報収集センターです。収集した知見は後ほど Google Skills 学習やラーニングハブで活用できます。
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* スクレイピングセクション */}
-        <div className="space-y-8">
+        <div className="lg:col-span-2 space-y-8">
           <Card className="shadow-md border-border/50 bg-card/40 backdrop-blur-sm overflow-hidden">
             <div className="h-1.5 w-full bg-blue-500" />
             <CardHeader className="pb-4">
@@ -111,15 +110,15 @@ export default function GatheringHub() {
                   placeholder="https://isokuhou.com/..."
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  className="bg-background/50"
+                  className="bg-background/50 focus-visible:ring-blue-500/30"
                   disabled={isScraping}
                 />
                 <Button
                   onClick={handleScrape}
                   disabled={!url || isScraping}
-                  className="bg-blue-600 hover:bg-blue-700 text-white min-w-[100px]"
+                  className="bg-blue-600 hover:bg-blue-700 text-white min-w-[100px] shadow-lg shadow-blue-500/20"
                 >
-                  {isScraping ? <RefreshCw className="w-4 h-4 animate-spin" /> : "取得する"}
+                  {isScraping ? <RefreshCw className="w-4 h-4 animate-spin" /> : "記事を取得"}
                 </Button>
               </div>
 
@@ -129,21 +128,21 @@ export default function GatheringHub() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="mt-6 p-5 rounded-xl bg-blue-500/5 border border-blue-500/20 shadow-inner"
+                    className="mt-6 p-5 rounded-2xl bg-blue-500/5 border border-blue-500/20 shadow-inner group"
                   >
                     <div className="flex justify-between items-start mb-3">
-                      <span className="text-xs font-bold bg-blue-500/10 text-blue-500 px-2.5 py-1 rounded-md">
-                        {scrapedResult.source || "Web"}
+                      <span className="text-[10px] font-black bg-blue-500/10 text-blue-500 px-2 py-1 rounded tracking-widest uppercase">
+                        {scrapedResult.source || "Found Insight"}
                       </span>
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500 group-hover:scale-110 transition-transform" />
                     </div>
-                    <h3 className="font-bold text-lg leading-tight mb-3">{scrapedResult.title}</h3>
+                    <h3 className="font-bold text-lg leading-snug mb-3 group-hover:text-blue-400 transition-colors">{scrapedResult.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-5 line-clamp-3">
                       {scrapedResult.summary}
                     </p>
 
                     <Button
-                      className="w-full gap-2 shadow-sm"
+                      className="w-full gap-2 shadow-md bg-emerald-600 hover:bg-emerald-700 text-white"
                       variant="default"
                       onClick={() => addToLearningHub(scrapedResult)}
                     >
@@ -154,30 +153,24 @@ export default function GatheringHub() {
               </AnimatePresence>
             </CardContent>
           </Card>
-
-          {/* Google Skills (Skill Tree) */}
-          <Card className="shadow-md border-border/50 bg-card/40 backdrop-blur-sm overflow-hidden h-full">
-            <div className="h-1.5 w-full bg-emerald-500" />
-            <SkillTree />
-          </Card>
         </div>
 
-        {/* 保存済み記事リスト */}
+        {/* 保存済み記事リスト（サイドバー） */}
         <div className="space-y-6">
           <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-2">
               <History className="w-5 h-5 text-muted-foreground" />
-              <h2 className="text-xl font-bold">最近保存した記事</h2>
+              <h2 className="text-lg font-bold">アーカイブ</h2>
             </div>
-            <Button variant="ghost" size="sm" onClick={fetchArticles} className="text-muted-foreground">
-              <RefreshCw className={`w-4 h-4 ${isLoadingArticles ? 'animate-spin' : ''}`} />
+            <Button variant="ghost" size="sm" onClick={fetchArticles} className="h-8 w-8 p-0 text-muted-foreground hover:bg-white/5">
+              <RefreshCw className={`w-3.5 h-3.5 ${isLoadingArticles ? 'animate-spin' : ''}`} />
             </Button>
           </div>
 
-          <div className="space-y-4 overflow-y-auto max-h-[650px] pr-2 custom-scrollbar">
+          <div className="space-y-4 overflow-y-auto max-h-[700px] pr-2 custom-scrollbar">
             {isLoadingArticles ? (
-              Array(3).fill(0).map((_, i) => (
-                <div key={i} className="h-32 rounded-xl bg-card/20 animate-pulse border border-border/30" />
+              Array(4).fill(0).map((_, i) => (
+                <div key={i} className="h-32 rounded-xl bg-card/20 animate-pulse border border-border/10" />
               ))
             ) : savedArticles.length > 0 ? (
               savedArticles.map((article) => (
@@ -185,30 +178,29 @@ export default function GatheringHub() {
                   key={article.id}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  whileHover={{ y: -2 }}
                 >
-                  <Card className="border-border/40 hover:border-primary/40 transition-all bg-card/30 backdrop-blur-sm">
+                  <Card className="border-border/40 hover:border-primary/40 transition-all bg-card/20 backdrop-blur-sm shadow-sm group">
                     <CardHeader className="p-4 pb-0">
-                      <div className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-tight">
+                      <div className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest group-hover:text-primary transition-colors">
                         {new URL(article.url).hostname}
                       </div>
-                      <CardTitle className="text-base line-clamp-1">{article.title}</CardTitle>
+                      <CardTitle className="text-sm line-clamp-1 leading-tight">{article.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="p-4 pt-2 pb-3">
-                      <p className="text-xs text-muted-foreground line-clamp-2 mb-3 leading-relaxed">
+                      <p className="text-[11px] text-muted-foreground line-clamp-2 mb-3 leading-snug">
                         {article.summary}
                       </p>
-                      <div className="flex justify-end gap-2">
+                      <div className="flex justify-between items-center gap-2">
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-8 text-[11px] hover:bg-primary/10 hover:text-primary"
+                          className="h-7 text-[10px] px-2 hover:bg-primary/10 hover:text-primary font-bold uppercase tracking-tighter"
                           onClick={() => addToLearningHub(article)}
                         >
-                          学習へ追加
+                          学習へ
                         </Button>
-                        <Button variant="outline" size="sm" className="h-8 text-[11px]">
-                          <a href={article.url} target="_blank" rel="noopener noreferrer">ソースを開く</a>
+                        <Button variant="outline" size="sm" className="h-7 text-[10px] px-2 bg-background/30 font-bold uppercase tracking-tighter">
+                          <a href={article.url} target="_blank" rel="noopener noreferrer">Source</a>
                         </Button>
                       </div>
                     </CardContent>
@@ -216,9 +208,12 @@ export default function GatheringHub() {
                 </motion.div>
               ))
             ) : (
-              <div className="text-center py-12 border-2 border-dashed border-border/40 rounded-2xl">
-                <Globe className="w-10 h-10 text-muted-foreground mx-auto mb-3 opacity-20" />
-                <p className="text-sm text-muted-foreground">まだ記事が保存されていません。</p>
+              <div className="text-center py-16 border-2 border-dashed border-border/10 rounded-3xl bg-muted/5">
+                <Globe className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-10" />
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest leading-loose">
+                  No Data<br />
+                  <span className="text-[10px] font-medium opacity-50">記事を収集してください</span>
+                </p>
               </div>
             )}
           </div>
