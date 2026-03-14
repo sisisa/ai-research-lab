@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Globe, RefreshCw, Plus, CheckCircle2, History, BookOpen } from "lucide-react"
 import { toast } from "sonner"
+import { cn } from "@/lib/utils"
 
 interface Article {
   id: string;
@@ -199,9 +200,14 @@ export default function SearchingHub() {
                         >
                           学習へ
                         </Button>
-                        <Button variant="outline" size="sm" className="h-7 text-[10px] px-2 bg-background/30 font-bold uppercase tracking-tighter">
-                          <a href={article.url} target="_blank" rel="noopener noreferrer">Source</a>
-                        </Button>
+                        <a 
+                          href={article.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-7 text-[10px] px-2 bg-background/30 font-bold uppercase tracking-tighter")}
+                        >
+                          Source
+                        </a>
                       </div>
                     </CardContent>
                   </Card>

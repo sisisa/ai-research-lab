@@ -20,7 +20,7 @@ const features = [
     description: "Google Skillsなどの外部プラットフォームと連携し、必要なスキル情報やトレンドを取り込み、学習コンテンツとして再構成します。",
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
-    link: "/searching"
+    link: "/google-skills"
   },
   {
     title: "4つの科学的学習メソッド",
@@ -48,7 +48,7 @@ export default function Dashboard() {
           情報収集と学習の統合プラットフォーム
         </h1>
         <p className="text-muted-foreground text-lg">
-          AI Research Labは、最新のAI情報の収集から、その知識の効率的な定着までをシームレスに行うプラットフォームです。
+          AI研究所は、最新のAI情報の収集から、その知識の効率的な定着までをシームレスに行うプラットフォームです。
         </p>
       </motion.div>
 

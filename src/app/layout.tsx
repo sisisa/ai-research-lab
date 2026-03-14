@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" })
 
 export const metadata: Metadata = {
-  title: "AI Research Lab | 未来を拓くAI学習プラットフォーム",
+  title: "AI研究所 | 未来を拓くAI学習プラットフォーム",
   description: "最新のAI速報の収集から、科学的根拠に基づいた学習定着、Google Skillsとの連携までを一元管理する次世代AIラボ。",
 }
 
@@ -39,7 +39,7 @@ export default function RootLayout({
                         <Sparkles className="w-2.5 h-2.5 text-amber-400 animate-pulse" />
                       </div>
                     </div>
-                    <span className="text-xl font-black tracking-tight text-white font-outfit">AI Research Lab</span>
+                    <span className="text-xl font-black tracking-tight text-white font-outfit">AI研究所</span>
                   </Link>
 
                   <nav className="hidden md:flex items-center gap-1">
@@ -71,15 +71,8 @@ export default function RootLayout({
               <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div className="flex items-center gap-2 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
                   <Brain className="w-5 h-5 text-primary" />
-                  <span className="font-bold font-outfit tracking-tighter">AI Research Lab</span>
+                  <span className="font-bold font-outfit tracking-tighter">AI研究所</span>
                 </div>
-                {/* <p className="text-xs text-gray-500 font-medium tracking-widest uppercase">
-                  © 2026 AI Research Lab. Powered by Advanced Intelligence.
-                </p>
-                <div className="flex gap-6 text-[10px] uppercase tracking-widest font-bold text-gray-600">
-                  <button className="hover:text-primary transition-colors">Documentation</button>
-                  <button className="hover:text-primary transition-colors">Privacy Policy</button>
-                </div> */}
               </div>
             </div>
           </footer>

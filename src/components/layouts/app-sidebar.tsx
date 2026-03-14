@@ -38,7 +38,7 @@ export function AppSidebar() {
           <div className="p-2 bg-primary/10 rounded-xl">
             <BrainCircuit className="w-6 h-6 text-primary" />
           </div>
-          <span className="font-bold text-xl tracking-tight">AI Research Lab</span>
+          <span className="font-bold text-xl tracking-tight">AI研究所</span>
         </div>
         <SidebarGroup className="mt-4">
           <SidebarGroupLabel className="text-xs uppercase tracking-wider text-muted-foreground px-6 font-semibold">
